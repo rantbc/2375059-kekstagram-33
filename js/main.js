@@ -1,3 +1,15 @@
+const PHOTOS_COUNT = 25;
+const MIN_LIKES_COUNT = 15;
+const MAX_LIKES_COUNT = 200;
+const MIN_COMMENTS_COUNT = 0;
+const MAX_COMMENTS_COUNT = 30;
+const MIN_AVATAR_COUNT = 1;
+const MAX_AVATAR_COUNT = 6;
+
+let photoId = 0;
+let photoUrl = 0;
+let commentId = 0;
+
 const USER_NAMES = [
   'София',
   'Марьям',
@@ -29,6 +41,8 @@ const PHOTO_DESCRIPTION = [
   'Свадьба'
 ];
 
+
+// Счетчик рандомных чисел
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -36,57 +50,52 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
+// Объект комментариев
 const userComments = () => {
-  const userId = Math.floor(Math.random() * 1000);
-  const userAvatar = getRandomInteger(1, 6);
+  commentId += 1;
 
-  const userMessageOne = getRandomInteger(0, USER_MESSAGES.length - 1);
-  const userMessageTwo = getRandomInteger(0, USER_MESSAGES.length - 1);
-
-  let userMessage;
-
-  // выводим на выбор 1 или 2 предложения из USER_MESSAGES в зависимости от идентификатора (четный/нечетный)
-  if (userId % 2 === 0) {
-    userMessage = USER_MESSAGES[userMessageOne];
-  } else {
-    userMessage = `${USER_MESSAGES[userMessageOne]} ${USER_MESSAGES[userMessageTwo]}`;
-  }
-
+  const userAvatar = getRandomInteger(MIN_AVATAR_COUNT, MAX_AVATAR_COUNT);
+  const userMessage = getRandomInteger(0, USER_MESSAGES.length - 1);
   const userName = getRandomInteger(0, USER_NAMES.length - 1);
 
   return {
-    id: userId,
+    id: commentId,
     avatar: `img/avatar-${userAvatar}.svg`,
-    //message: USER_MESSAGES[userMessage],
-    message: userMessage,
+    message: USER_MESSAGES[userMessage],
     name: USER_NAMES[userName]
   };
 };
 
+// Объект фотографий
 const photoDetails = () => {
-  const photoId = getRandomInteger(1, 25);
-  const photoUrl = getRandomInteger(1, 25);
+  photoId += 1;
+  photoUrl += 1;
+
   const photoDescription = getRandomInteger(0, PHOTO_DESCRIPTION.length - 1);
-  const photoLike = getRandomInteger(15, 200);
+  const photoLike = getRandomInteger(MIN_LIKES_COUNT, MAX_LIKES_COUNT);
+  const photocomments = getRandomInteger(MIN_COMMENTS_COUNT, MAX_COMMENTS_COUNT);
 
-  // создаем переменную для получения случайного набора комментариев
-  const commentIndex = getRandomInteger(1, 30);
+  /*const commentsList = [];
+  for (let i = 0; i < photocomments; i++) {
+    commentsList.push(userComments());
+  }*/
 
-  // создаем массив для хранение комментариев
-  const commentsList = [];
-
-  // пишем цикл для вывода случайного количества комментариев
-  for (let i = 0; i < commentIndex; i++) {
-    commentsList.push(userComments()); // на каждой итерации добавляем по одному комментарию
-  }
+  const commentsList = Array.from({length: photocomments}, userComments);
 
   return {
     id: photoId,
     url: `photos/${photoUrl}.jpg`,
     description: PHOTO_DESCRIPTION[photoDescription],
     likes: photoLike,
-    comments: commentsList // передаем массив комментариев
+    comments: commentsList
   };
 };
 
-console.log(photoDetails());
+
+const photosList = Array.from({length: PHOTOS_COUNT}, photoDetails);
+
+/*for (let i = 1; i <= PHOTOS_COUNT; i++) {
+  photosList.push(photoDetails());
+}*/
+
+console.log(photosList);
