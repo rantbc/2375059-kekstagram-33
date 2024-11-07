@@ -1,15 +1,25 @@
-const stringValidate = (string, maxLength) => string.length <= maxLength ? true : false
-stringValidate('mynewstring', 20);
-// линтер ругается на консоль, проверял так: console.log(stringValidate('mynewstring', 20));
+const meeting = (workStart, workEnd, meetingStart, meetingDuration) => {
 
-function palindromCheck (string) {
-  const normalizeString = String(string).replaceAll(' ', '').toLowerCase();
-  let emptyString = '';
-  const stringLastSym = normalizeString.length - 1;
-  for (let i = stringLastSym; i >= 0; i--) {
-    emptyString += normalizeString[i];
+  const workStartTime = workStart;
+  const workEndTime = workEnd;
+  const meetingStartTime = meetingStart;
+
+  const toMins = (time) => {
+    let parts = time.split(':'); // создаем из строки массивы, разделитель :
+    parts = Number(parts[0]) * 60 + Number(parts[1]); // переводим в минуты
+    return parts;
+  };
+
+  const workStartTimeMins = toMins(workStartTime);
+  const meetingStartTimeMins = toMins(meetingStartTime);
+  const workTimeDuration = toMins(workEndTime) - toMins(workStartTime);
+  const meetingTimeDuraion = toMins(meetingStartTime) + meetingDuration - toMins(workStartTime);
+
+  if (workStartTimeMins <= meetingStartTimeMins && workTimeDuration >= meetingTimeDuraion) {
+    return true;
   }
-  return normalizeString === emptyString;
-}
-palindromCheck('топот');
-// линтер ругается на консоль, проверял так: console.log(valindromCheck('топот'));
+  return false;
+
+};
+
+console.log(meeting('8:00', '17:30', '08:00', 900));
