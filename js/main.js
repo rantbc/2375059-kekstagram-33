@@ -1,1 +1,3 @@
-import './photo-list.js';
+import {getPhotosList} from './photo-list.js';
+
+getPhotosList();
