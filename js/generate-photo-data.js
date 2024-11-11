@@ -53,7 +53,7 @@ const photoDetails = () => {
 };
 
 
-const photosList = Array.from({length: PHOTOS_COUNT}, photoDetails);
+const photosList = () => Array.from({length: PHOTOS_COUNT}, photoDetails);
 
 
 export {
