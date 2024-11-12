@@ -1,3 +1,3 @@
-import {photosList} from './generate-photo-data.js';
+import {getPhotosList} from './photo-list.js';
 
-console.log(photosList);
+getPhotosList();
