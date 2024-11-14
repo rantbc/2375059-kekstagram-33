@@ -3,6 +3,8 @@ import {
   getRandomArrayElement
 } from './util.js';
 
+import './photo-popup.js';
+
 
 import {
   PHOTOS_COUNT,

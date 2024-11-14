@@ -22,4 +22,4 @@ const meeting = (workStart, workEnd, meetingStart, meetingDuration) => {
 
 };
 
-console.log(meeting('8:00', '17:30', '08:00', 900));
+// console.log(meeting('8:00', '17:30', '08:00', 900));
