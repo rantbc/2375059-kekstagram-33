@@ -1,7 +1,7 @@
 import {
   getRandomInteger,
   getRandomArrayElement
-} from './util.js';
+} from './utils.js';
 
 import './photo-popup.js';
 
