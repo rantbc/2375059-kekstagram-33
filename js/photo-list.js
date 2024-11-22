@@ -17,7 +17,7 @@ const getPhotosList = () => {
       photoElementItem.addEventListener('click', (evt) => { // событие при клике на миниатюру
         evt.preventDefault();
 
-        openBigPicture(photo); // добавляем функцию открытия модалки
+        openBigPicture(photo); // функция открытия модалки
       });
 
       const photoImgElement = photoElement.querySelector('.picture__img');
